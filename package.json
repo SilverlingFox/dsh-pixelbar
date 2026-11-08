@@ -1,6 +1,6 @@
 {
   "name": "dsh-pixelbar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DSH 插件：把花再 Halo PixelBar 桌面像素屏变成常驻工具（推文字 / 切场景 / 屏色 / 氛围灯 / 音量）",
   "type": "module",
   "main": "index.js",
