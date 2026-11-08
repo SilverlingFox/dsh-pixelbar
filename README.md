@@ -37,6 +37,22 @@
 
 ## 安装（DSH 插件）
 
+任选一种。
+
+### 方式一：npm / 插件市场
+
+包已发布：[`dsh-pixelbar`](https://www.npmjs.com/package/dsh-pixelbar)
+
+```powershell
+npm install dsh-pixelbar
+```
+
+装进 DSH profile 目录（`%USERPROFILE%\.dsh\profiles\desktop`），再把 `dsh-pixelbar` 加进该目录 `package.json` 的 `dsh.profile.bundles` 数组，重启 DSH 即可。包里的 `package.json` 声明了 `dsh.bundle: { patch: "./cordis.patch.yml" }`，DSH 会据此加载插件。
+
+> 也可以直接在 DSH 的插件市场 / 插件管理里安装 `dsh-pixelbar`，效果相同。
+
+### 方式二：脚本（离线、免 npm）
+
 1. 双击 `apply.bat`（或 `pwsh -File apply.ps1`）
 
    脚本会：探测 `%USERPROFILE%\.dsh\profiles\desktop`（找不到就取唯一候选，或用 `DSH_PROFILE_DIR` 指定）→ 复制 `index.js / package.json / cordis.patch.yml / scripts/` 到 profile 的 `node_modules\dsh-pixelbar` → 把 `dsh-pixelbar` 登记进 `dsh.profile.bundles`。原 `package.json` 会备份成 `package.json.pixelbar.bak`。
