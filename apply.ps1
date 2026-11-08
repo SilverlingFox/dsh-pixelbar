@@ -40,7 +40,10 @@ New-Item -ItemType Directory -Force $dest | Out-Null
 foreach ($f in @('index.js', 'package.json', 'cordis.patch.yml', 'README.md', 'LICENSE')) {
   if (Test-Path (Join-Path $src $f)) { Copy-Item (Join-Path $src $f) $dest -Force }
 }
-Copy-Item (Join-Path $src 'scripts') $dest -Recurse -Force
+# 只复制 .py，跳过 __pycache__ 等中间产物
+$destScripts = Join-Path $dest 'scripts'
+New-Item -ItemType Directory -Force $destScripts | Out-Null
+Copy-Item (Join-Path $src 'scripts\*.py') $destScripts -Force
 "[1/2] 已复制插件到 $dest"
 "[i] python = $($pyCmd.Source)"
 
