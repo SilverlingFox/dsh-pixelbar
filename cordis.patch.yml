@@ -1,0 +1,13 @@
+# dsh-pixelbar —— DSH bundle patch（挂载声明）
+# apply.ps1 会把本目录复制到 profile 的 node_modules\，随 DSH 启动加载。
+- insert:
+    - id: dsh-pixelbar
+      name: dsh-pixelbar
+      config:
+        # python：留空 = 自动探测（环境变量 DSH_PIXELBAR_PYTHON → PATH 上的 python3 / python）
+        # script / clockScript：留空 = 使用包内 scripts/ 下的脚本
+        # 需要指定时取消注释并改写：
+        # python: 'C:\Python313\python.exe'
+        # script: 'scripts/halo_pixelbar.py'
+        defaultColor: magenta
+        restoreSeconds: 15

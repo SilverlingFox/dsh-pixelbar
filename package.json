@@ -1,0 +1,41 @@
+{
+  "name": "dsh-pixelbar",
+  "version": "1.0.0",
+  "description": "DSH 插件：把花再 Halo PixelBar 桌面像素屏变成常驻工具（推文字 / 切场景 / 屏色 / 氛围灯 / 音量）",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "scripts",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "halo-pixelbar",
+    "pixelbar",
+    "hid",
+    "edifier",
+    "pixel-display"
+  ],
+  "homepage": "https://github.com/SilverlingFox/dsh-pixelbar#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilverlingFox/dsh-pixelbar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SilverlingFox/dsh-pixelbar/issues"
+  },
+  "author": "SilverlingFox",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

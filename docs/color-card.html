@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Halo PixelBar 标准色卡</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #1a1a2e; color: #fff; }
+  h1 { text-align: center; padding: 18px; font-size: 20px; color: #ccc; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 0 16px 20px; max-width: 1200px; margin: 0 auto; }
+  .swatch { border-radius: 10px; aspect-ratio: 16/9; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.25); transition: transform 0.1s; user-select: none; }
+  .swatch:hover { transform: scale(1.04); border-color: #fff; }
+  .swatch .name { font-size: 18px; font-weight: bold; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+  .swatch .hex { font-size: 13px; margin-top: 4px; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+  .tip { text-align: center; color: #888; font-size: 13px; padding-bottom: 16px; }
+  /* 全屏纯色视图 */
+  #full { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99; cursor: zoom-out; }
+  #full .fname { font-size: 30px; font-weight: bold; text-shadow: 0 2px 6px rgba(0,0,0,0.9); background: rgba(0,0,0,0.35); padding: 6px 18px; border-radius: 8px; }
+  #full .fhex { font-size: 18px; margin-top: 10px; text-shadow: 0 2px 6px rgba(0,0,0,0.9); background: rgba(0,0,0,0.35); padding: 4px 14px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h1>🎨 Halo PixelBar 标准色卡（点击色块全屏显示，点击任意处退出）</h1>
+<div class="grid" id="grid"></div>
+<div class="tip">电脑屏幕显示的是标准色（sRGB），对照音箱像素屏看偏差。每看一个：屏幕上方数字是当前第几个，方便记录。</div>
+<div id="full" onclick="exitFull()">
+  <div class="fname" id="fname"></div>
+  <div class="fhex" id="fhex"></div>
+</div>
+<script>
+const COLORS = [
+  ["纯红", "#FF0000"],
+  ["纯绿", "#00FF00"],
+  ["纯蓝", "#0000FF"],
+  ["纯白", "#FFFFFF"],
+  ["青色", "#00FFFF"],
+  ["黄色", "#FFFF00"],
+  ["品红", "#FF00FF"],
+  ["默认粉", "#F0B4C8"],
+  ["橙色", "#FF8800"],
+  ["天蓝", "#66AFFF"],
+];
+const grid = document.getElementById("grid");
+COLORS.forEach(([name, hex], i) => {
+  const div = document.createElement("div");
+  div.className = "swatch";
+  div.style.background = hex;
+  div.innerHTML = `<span class="name">${i + 1}. ${name}</span><span class="hex">${hex}</span>`;
+  div.onclick = () => showFull(name, hex, i);
+  grid.appendChild(div);
+});
+function showFull(name, hex, i) {
+  const full = document.getElementById("full");
+  full.style.display = "flex";
+  full.style.background = hex;
+  document.getElementById("fname").textContent = `${i + 1}. ${name}`;
+  document.getElementById("fhex").textContent = hex;
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  }
+}
+function exitFull() {
+  document.getElementById("full").style.display = "none";
+  if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") exitFull(); });
+</script>
+</body>
+</html>
